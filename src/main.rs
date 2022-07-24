@@ -15,7 +15,6 @@ enum GameState {
     Playing,
 }
 
-
 #[derive(AssetCollection)]
 pub struct MyAssets {
     #[asset(path = "block.png")]
