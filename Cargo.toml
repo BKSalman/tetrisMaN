@@ -1,0 +1,18 @@
+[package]
+name = "tetris_man"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+bevy = { version = "0.7.0" }
+bevy_asset_loader = { version = "0.11.0", features = [
+    "2d",
+    "stageless",
+    "progress_tracking",
+    "progress_tracking_stageless",
+] }
+iyes_loopless = "0.5.1"
+iyes_progress = { version = "0.3.0", features = ["iyes_loopless"] }
+bevy_embedded_assets = "0.3.0"
