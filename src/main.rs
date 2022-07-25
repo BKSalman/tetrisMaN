@@ -6,7 +6,7 @@ use bevy_embedded_assets::*;
 
 mod plugins;
 
-use plugins::map::MapPlugin;
+use plugins::{map::MapPlugin, blocks::BlocksPlugin};
 
 #[derive(Clone, Hash, Eq, PartialEq, Debug)]
 enum GameState {
@@ -50,6 +50,7 @@ fn main() {
         .add_plugins_with(DefaultPlugins, |group| {
             group.add_before::<bevy::asset::AssetPlugin, _>(EmbeddedAssetPlugin)
         })
+        .add_plugin(BlocksPlugin)
         .add_plugin(MapPlugin)
         .insert_resource(ClearColor(Color::rgba(0.38, 0.39, 0.44, 1.)))
         .add_enter_system(GameState::Playing, setup)

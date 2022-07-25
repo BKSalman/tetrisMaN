@@ -3,7 +3,19 @@ use iyes_loopless::prelude::AppLooplessStateExt;
 
 use crate::{GameState, MyAssets};
 
-const BLOCK_SIZE: f32 = 100.;
+pub const BLOCK_SIZE: f32 = 100.;
+pub const ROWS: i32 = 15;
+pub const COLUMNS: i32 = 10;
+
+#[derive(Component)]
+pub struct Row {
+	pub row_number: i32,
+}
+
+#[derive(Component)]
+pub struct Column {
+	pub column_number: i32,
+}
 
 pub struct MapPlugin;
 
@@ -15,14 +27,14 @@ impl Plugin for MapPlugin {
 }
 
 fn map_creation(mut commands:Commands, windows: Res<Windows>) {
-	let window = windows.get_primary().unwrap();
+	// let window = windows.get_primary().unwrap();
 	let padding = 5f32;
 	let total_block_size = BLOCK_SIZE + padding;
-	let (columns, rows) = (10, 15);
-	for row in 0..rows {
-		for column in 0..columns {
-			let pos = Vec3::new(((column as f32 * total_block_size) - (columns as f32 * total_block_size)/2.) + total_block_size/2.,
-				 (row as f32 * total_block_size) - (rows as f32 * total_block_size)/2., 1.);
+	for row in 0..ROWS {
+		println!("{row}");
+		for column in 0..COLUMNS {
+			let pos = Vec3::new(((column as f32 * total_block_size) - (COLUMNS as f32 * total_block_size)/2.) + total_block_size/2.,
+				 (-row as f32 * total_block_size) + (ROWS as f32 * total_block_size)/2., 1.);
 		
 			commands.spawn_bundle(SpriteBundle {
 				sprite: Sprite {
@@ -35,8 +47,9 @@ fn map_creation(mut commands:Commands, windows: Res<Windows>) {
 					..Default::default()
 				},
 				..Default::default()
-			});
-			
+			})
+			.insert(Row {row_number: row})
+			.insert(Column {column_number: column});			
 		}
 	}
 }
