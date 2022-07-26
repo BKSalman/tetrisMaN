@@ -3,6 +3,8 @@ use iyes_loopless::prelude::AppLooplessStateExt;
 
 use crate::{GameState, MyAssets};
 
+use super::utils::center;
+
 pub const BLOCK_SIZE: f32 = 100.;
 pub const ROWS: i32 = 15;
 pub const COLUMNS: i32 = 10;
@@ -31,11 +33,8 @@ fn map_creation(mut commands:Commands, windows: Res<Windows>) {
 	let padding = 5f32;
 	let total_block_size = BLOCK_SIZE + padding;
 	for row in 0..ROWS {
-		println!("{row}");
 		for column in 0..COLUMNS {
-			let pos = Vec3::new(((column as f32 * total_block_size) - (COLUMNS as f32 * total_block_size)/2.) + total_block_size/2.,
-				 (-row as f32 * total_block_size) + (ROWS as f32 * total_block_size)/2., 1.);
-		
+			let pos = center(column, row, total_block_size, COLUMNS, ROWS);
 			commands.spawn_bundle(SpriteBundle {
 				sprite: Sprite {
 					color: Color::rgba(0.88, 0.96, 0.99, 1.),
