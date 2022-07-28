@@ -1,5 +1,6 @@
-use bevy::prelude::*;
+// use bevy::prelude::*;
 
-pub mod map;
 pub mod blocks;
+pub mod debug;
+pub mod map;
 pub mod utils;
